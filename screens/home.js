@@ -19,8 +19,10 @@ export default function Home({navigation}) {
 
   useFocusEffect(
   useCallback(() => {
-    carregarProdutos(); // chama sua função que atualiza a lista
-  }, [])
+    if (db) {
+      carregarProdutos();
+    }
+  }, [db])
 );
   // Abre o banco e cria a tabela
   useEffect(() => {

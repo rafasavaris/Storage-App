@@ -7,7 +7,7 @@ import AddProductScreen from './screens/addProductScreen';
 
 const Stack = createNativeStackNavigator();
 
-export default function App({ navigation }) {
+export default function App({  }) {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home"screenOptions={{

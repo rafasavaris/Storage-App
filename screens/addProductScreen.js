@@ -34,8 +34,11 @@ export default function AddProductScreen({ }) {
         {
           text: 'OK',
           onPress: () => navigation.goBack(), // volta para a Home
+          
         },
       ]);
+      const resultado = await db.getAllAsync('SELECT * FROM produtos;');
+          console.log('Todos os produtos:', resultado);
     } catch (error) {
       console.error('Erro ao salvar produto:', error);
       Alert.alert('Erro', 'Falha ao salvar produto');

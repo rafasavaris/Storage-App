@@ -4,8 +4,8 @@ import {
 } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 import { useNavigation } from '@react-navigation/native';
+import styles from './styles';
 
-// Abre o banco de forma moderna
 const openDb = async () => {
   const db = await SQLite.openDatabaseAsync('produtos.db');
   return db;
@@ -33,7 +33,7 @@ export default function AddProductScreen({ }) {
       Alert.alert('Sucesso', 'Produto adicionado com sucesso', [
         {
           text: 'OK',
-          onPress: () => navigation.goBack(), // volta para a Home
+          onPress: () => navigation.goBack(),
           
         },
       ]);
@@ -80,30 +80,3 @@ export default function AddProductScreen({ }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: '#fff' },
-  label: { fontWeight: 'bold', fontSize: 16, marginTop: 16 },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    padding: 10,
-    marginTop: 8,
-  },
-  textarea: {
-    height: 100,
-    textAlignVertical: 'top',
-  },
-  button: {
-    backgroundColor: '#d65a75',
-    padding: 15,
-    borderRadius: 8,
-    marginTop: 24,
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-});

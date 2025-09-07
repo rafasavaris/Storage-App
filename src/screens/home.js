@@ -1,14 +1,25 @@
 import React, { useEffect, useState, useCallback, useLayoutEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Alert, StatusBar  } from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  StatusBar,
+  Modal,
+} from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import styles from './styles'; // seu styles.js existente
+import styles from './styles';
 import { getProdutos, deleteProduto } from '../database/dbFunctions';
 import ProductItem from '../components/products';
 
 export default function Home({ navigation }) {
   const [produtos, setProdutos] = useState([]);
-  const [ordenacao, setOrdenacao] = useState('criação'); // 'criação' ou 'alfabética'
+  const [ordenacao, setOrdenacao] = useState('criação');
+  const [produtoSelecionado, setProdutoSelecionado] = useState(null);
+  const [modalVisivel, setModalVisivel] = useState(false);
 
   const carregarProdutos = async () => {
     try {
@@ -29,7 +40,7 @@ export default function Home({ navigation }) {
       carregarProdutos();
     }, [ordenacao])
   );
-  
+
   useEffect(() => {
     carregarProdutos();
   }, [ordenacao]);
@@ -48,35 +59,78 @@ export default function Home({ navigation }) {
     ]);
   };
 
-  useLayoutEffect(() => {
-  navigation.setOptions({
-    headerRight: () => (
-      <TouchableOpacity
-        onPress={alternarOrdenacao}
-        style={{ marginRight: 10, flexDirection: 'row', alignItems: 'center' }}
-      >
-        <Ionicons name="swap-vertical" size={20} color="#ffffffff" />
-        <Text style={{ marginLeft: 4, color: '#ffffffff', fontSize: 14 }}>
-          {ordenacao === 'criação' ? 'Criação' : 'A-Z'}
-        </Text>
-      </TouchableOpacity>
-    ),
-  });
-}, [navigation, ordenacao]);
-
-  const renderItem = ({ item }) => (
-    <ProductItem item={item} onDelete={excluirProduto} />
-  );
-
   const alternarOrdenacao = () => {
     const novaOrdenacao = ordenacao === 'criação' ? 'alfabética' : 'criação';
     setOrdenacao(novaOrdenacao);
   };
 
+  const abrirModal = (produto) => {
+    setProdutoSelecionado(produto);
+    setModalVisivel(true);
+  };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity
+          onPress={alternarOrdenacao}
+          style={{ marginRight: 10, flexDirection: 'row', alignItems: 'center' }}
+        >
+          <Ionicons name="swap-vertical" size={20} color="#fff" />
+          <Text style={{ marginLeft: 4, color: '#fff', fontSize: 14 }}>
+            {ordenacao === 'criação' ? 'Criação' : 'A-Z'}
+          </Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation, ordenacao]);
+
+  const renderItem = ({ item }) => (
+    <ProductItem
+      item={item}
+      onDelete={excluirProduto}
+      onPress={() => abrirModal(item)}
+    />
+  );
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
 
+      {/* MODAL DE DETALHES DO PRODUTO */}
+      <Modal
+        visible={modalVisivel}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setModalVisivel(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Detalhes do Produto</Text>
+            {produtoSelecionado && (
+              <>
+                <Text style={styles.modalText}>Nome: {produtoSelecionado.nome}</Text>
+                <Text style={styles.modalText}>
+                  Preço: R$ {parseFloat(produtoSelecionado.preco).toFixed(2)}
+                </Text>
+                {produtoSelecionado.descricao && (
+                  <Text style={styles.modalText}>
+                    Descrição: {produtoSelecionado.descricao}
+                  </Text>
+                )}
+              </>
+            )}
+            <TouchableOpacity
+              onPress={() => setModalVisivel(false)}
+              style={styles.modalCloseBtn}
+            >
+              <Text style={styles.modalCloseText}>Fechar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      {/* LISTA DE PRODUTOS */}
       <FlatList
         data={produtos}
         keyExtractor={(item) => item.id.toString()}
@@ -96,6 +150,7 @@ export default function Home({ navigation }) {
         }
       />
 
+      {/* BOTÃO FLUTUANTE */}
       <TouchableOpacity
         style={styles.fab}
         onPress={() => navigation.navigate('AddProductScreen')}

@@ -2,13 +2,12 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
 card: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     backgroundColor: '#fff',
     padding: 16,
     borderRadius: 8,
-    marginBottom: 12,
+    marginBottom: 10,
+    marginHorizontal: 5,
+    elevation: 2,
 },
 nome: { 
     fontSize: 16, 
@@ -17,15 +16,22 @@ nome: {
 preco: { 
     fontSize: 14,
     color: '#d65a75',
-    marginVertical: 4
+    marginTop: 4
 },
 desc: { 
     fontSize: 12, 
-    color: '#666'
+    color: '#666',
+    marginTop: 4,
 },
 delete: {
-    backgroundColor: '#ff4757',
-    padding: 8, 
-    borderRadius: 6
+    backgroundColor: '#d11a2a',
+    borderRadius: 4,
+    padding: 6,
+    marginLeft: 10,
+},
+item: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
 },
 });

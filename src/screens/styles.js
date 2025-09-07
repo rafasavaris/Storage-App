@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
 container: {
     flex: 1,
-    paddingTop: 50,
+    paddingTop: 20,
     paddingHorizontal: 16,
     backgroundColor: '#f5f5f5',
 },
@@ -60,6 +60,39 @@ button: {
     alignItems: 'center',
 },
 buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+},
+modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.25)',
+    justifyContent: 'center',
+    alignItems: 'center',
+},
+modalContent: {
+    width: '85%',
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 20,
+    elevation: 5,
+},
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+},
+modalText: {
+    fontSize: 16,
+    marginBottom: 8,
+},
+modalCloseBtn: {
+    marginTop: 15,
+    backgroundColor: '#d65a75',
+    paddingVertical: 10,
+    borderRadius: 6,
+    alignItems: 'center',
+},
+modalCloseText: {
     color: '#fff',
     fontWeight: 'bold',
 },

@@ -85,15 +85,20 @@ modalText: {
     fontSize: 16,
     marginBottom: 8,
 },
-modalCloseBtn: {
+modalEditBtn: {
     marginTop: 15,
     backgroundColor: '#d65a75',
     paddingVertical: 10,
     borderRadius: 6,
     alignItems: 'center',
 },
-modalCloseText: {
+modalEditText: {
     color: '#fff',
     fontWeight: 'bold',
 },
+closeButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+}
 });

@@ -97,7 +97,6 @@ export default function Home({ navigation }) {
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
 
-      {/* MODAL DE DETALHES DO PRODUTO */}
       <Modal
         visible={modalVisivel}
         transparent={true}
@@ -106,6 +105,9 @@ export default function Home({ navigation }) {
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
+            <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisivel(false)}>
+            <Ionicons name="close" size={24} color="#333" />
+            </TouchableOpacity>
             <Text style={styles.modalTitle}>Detalhes do Produto</Text>
             {produtoSelecionado && (
               <>
@@ -122,15 +124,14 @@ export default function Home({ navigation }) {
             )}
             <TouchableOpacity
               onPress={() => setModalVisivel(false)}
-              style={styles.modalCloseBtn}
+              style={styles.modalEditBtn}
             >
-              <Text style={styles.modalCloseText}>Fechar</Text>
+              <Text style={styles.modalEditText}>Editar</Text>
             </TouchableOpacity>
           </View>
         </View>
       </Modal>
 
-      {/* LISTA DE PRODUTOS */}
       <FlatList
         data={produtos}
         keyExtractor={(item) => item.id.toString()}

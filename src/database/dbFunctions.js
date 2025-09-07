@@ -18,15 +18,15 @@ export const getProdutos = async () => {
   return await db.getAllAsync('SELECT * FROM produtos;');
 };
 
-export const deleteProduto = async (id) => {
-  const db = await getDatabase();
-  return await db.runAsync('DELETE FROM produtos WHERE id = ?;', [id]);
-};
-
 export const addProduto = async ({ nome, preco, descricao }) => {
   const db = await getDatabase();
   return await db.runAsync(
     'INSERT INTO produtos (nome, preco, descricao) VALUES (?, ?, ?);',
-    [nome, preco, descricao]
+    [nome, preco, descricao || null]
   );
+};
+
+export const deleteProduto = async (id) => {
+  const db = await getDatabase();
+  return await db.runAsync('DELETE FROM produtos WHERE id = ?;', [id]);
 };

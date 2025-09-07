@@ -1,10 +1,11 @@
+// src/database/db.js
 import * as SQLite from 'expo-sqlite';
 
-let db = null;
+let dbInstance = null;
 
 export const getDatabase = async () => {
-  if (!db) {
-    db = await SQLite.openDatabaseAsync('produtos.db');
+  if (!dbInstance) {
+    dbInstance = await SQLite.openDatabaseAsync('produtos.db');
   }
-  return db;
+  return dbInstance;
 };

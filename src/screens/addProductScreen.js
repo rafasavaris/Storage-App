@@ -5,13 +5,9 @@ import {
 import * as SQLite from 'expo-sqlite';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
+import { addProduto } from '../database/dbFunctions';
 
-const openDb = async () => {
-  const db = await SQLite.openDatabaseAsync('produtos.db');
-  return db;
-};
-
-export default function AddProductScreen({ }) {
+export default function AddProductScreen() {
   const navigation = useNavigation();
   const [nome, setNome] = useState('');
   const [preco, setPreco] = useState('');
@@ -24,24 +20,18 @@ export default function AddProductScreen({ }) {
     }
 
     try {
-      const db = await openDb();
-      await db.runAsync(
-        'INSERT INTO produtos (nome, preco, descricao) VALUES (?, ?, ?);',
-        [nome, parseFloat(preco), descricao || null]
-      );
+      await addProduto({
+        nome,
+        preco: parseFloat(preco),
+        descricao: descricao || null,
+      });
 
       Alert.alert('Sucesso', 'Produto adicionado com sucesso', [
-        {
-          text: 'OK',
-          onPress: () => navigation.goBack(),
-          
-        },
+        { text: 'OK', onPress: () => navigation.goBack() },
       ]);
-      const resultado = await db.getAllAsync('SELECT * FROM produtos;');
-          console.log('Todos os produtos:', resultado);
     } catch (error) {
-      console.error('Erro ao salvar produto:', error);
-      Alert.alert('Erro', 'Falha ao salvar produto');
+      console.error('Erro ao adicionar produto:', error);
+      Alert.alert('Erro', 'Não foi possível adicionar o produto');
     }
   };
 
@@ -71,7 +61,6 @@ export default function AddProductScreen({ }) {
         value={descricao}
         onChangeText={setDescricao}
         multiline
-        numberOfLines={4}
       />
 
       <TouchableOpacity style={styles.button} onPress={salvarProduto}>

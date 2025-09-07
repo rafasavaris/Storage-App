@@ -1,17 +1,23 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Alert, StatusBar } from 'react-native';
+import React, { useEffect, useState, useCallback, useLayoutEffect } from 'react';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Alert, StatusBar  } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import styles from './styles';
+import styles from './styles'; // seu styles.js existente
 import { getProdutos, deleteProduto } from '../database/dbFunctions';
 import ProductItem from '../components/products';
 
 export default function Home({ navigation }) {
   const [produtos, setProdutos] = useState([]);
+  const [ordenacao, setOrdenacao] = useState('criação'); // 'criação' ou 'alfabética'
 
   const carregarProdutos = async () => {
     try {
-      const lista = await getProdutos();
+      let lista = await getProdutos();
+
+      if (ordenacao === 'alfabética') {
+        lista.sort((a, b) => a.nome.localeCompare(b.nome));
+      }
+
       setProdutos(lista);
     } catch (error) {
       console.error('Erro ao carregar produtos:', error);
@@ -21,8 +27,12 @@ export default function Home({ navigation }) {
   useFocusEffect(
     useCallback(() => {
       carregarProdutos();
-    }, [])
+    }, [ordenacao])
   );
+  
+  useEffect(() => {
+    carregarProdutos();
+  }, [ordenacao]);
 
   const excluirProduto = (id) => {
     Alert.alert('Excluir Produto', 'Tem certeza que deseja excluir?', [
@@ -38,9 +48,30 @@ export default function Home({ navigation }) {
     ]);
   };
 
+  useLayoutEffect(() => {
+  navigation.setOptions({
+    headerRight: () => (
+      <TouchableOpacity
+        onPress={alternarOrdenacao}
+        style={{ marginRight: 10, flexDirection: 'row', alignItems: 'center' }}
+      >
+        <Ionicons name="swap-vertical" size={20} color="#ffffffff" />
+        <Text style={{ marginLeft: 4, color: '#ffffffff', fontSize: 14 }}>
+          {ordenacao === 'criação' ? 'Criação' : 'A-Z'}
+        </Text>
+      </TouchableOpacity>
+    ),
+  });
+}, [navigation, ordenacao]);
+
   const renderItem = ({ item }) => (
     <ProductItem item={item} onDelete={excluirProduto} />
   );
+
+  const alternarOrdenacao = () => {
+    const novaOrdenacao = ordenacao === 'criação' ? 'alfabética' : 'criação';
+    setOrdenacao(novaOrdenacao);
+  };
 
   return (
     <View style={styles.container}>

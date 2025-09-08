@@ -30,3 +30,13 @@ export const deleteProduto = async (id) => {
   const db = await getDatabase();
   return await db.runAsync('DELETE FROM produtos WHERE id = ?;', [id]);
 };
+
+export const updateProduto = async ({ id, nome, preco, descricao }) => {
+  const db = await getDatabase();
+  return await db.runAsync(
+    `UPDATE produtos
+     SET nome = ?, preco = ?, descricao = ?
+     WHERE id = ?;`,
+    [nome, preco, descricao || null, id]
+  );
+};

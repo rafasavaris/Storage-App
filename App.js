@@ -7,6 +7,7 @@ import { Image } from 'react-native';
 
 import Home from './src/screens/home';
 import AddProductScreen from './src/screens/addProductScreen';
+import EditProductScreen from './src/screens/editProductScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +47,12 @@ export default function App() {
           component={AddProductScreen}
           options={{ title: 'Adicionar Produto' }}
         />
+        <Stack.Screen
+        name="EditProductScreen"
+        component={EditProductScreen}
+        options={{ title: 'Editar Produto' }}
+      />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

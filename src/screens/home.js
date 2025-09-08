@@ -123,7 +123,7 @@ export default function Home({ navigation }) {
               </>
             )}
             <TouchableOpacity
-              onPress={() => setModalVisivel(false)}
+              onPress={() =>navigation.navigate('EditProductScreen', { produto: produtoSelecionado })}
               style={styles.modalEditBtn}
             >
               <Text style={styles.modalEditText}>Editar</Text>

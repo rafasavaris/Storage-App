@@ -78,9 +78,9 @@ Dispositivo físico: escaneie o QR code usando o app Expo Go.
 src/
  ├─ components/         # Componentes reutilizáveis
  ├─ database/           # Configuração e funções do SQLite
- ├─ screens/            # Telas do app (Home, AddProduct, EditProduct)
- └─ styles/             # Arquivos de estilo
+ └─ screens/            # Telas do app (Home, AddProduct, EditProduct)
 
+Sendo que a pasta ```components``` e a pasta ```screens``` possuem arquivos ```styles.js``` que apresentam os estilos das páginas.
 ---
 
 ## Como usar

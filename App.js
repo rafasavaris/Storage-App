@@ -47,7 +47,7 @@ function HeaderTitle() {
         style={{ width: 40, height: 40, resizeMode: 'contain', marginRight: 8 }}
       />
       <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold' }}>
-        Minha Loja
+        Lista de Produtos
       </Text>
     </View>
   );

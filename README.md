@@ -75,12 +75,13 @@ Dispositivo físico: escaneie o QR code usando o app Expo Go.
 ---
 
 ## Estrutura do projeto
-src/
- ├─ components/         # Componentes reutilizáveis
- ├─ database/           # Configuração e funções do SQLite
- └─ screens/            # Telas do app (Home, AddProduct, EditProduct)
+Dentro da pasta ```src```:
+- **components/**: Contém componentes que podem ser reutilizados em várias telas, como a listagem de produtos (`ProductItem`).
+- **database/**: Contém toda a lógica de conexão com o SQLite e funções para CRUD (create, read, update, delete).
+- **screens/**: Contém as telas do aplicativo, cada uma com sua lógica e interface.
 
 Sendo que a pasta ```components``` e a pasta ```screens``` possuem arquivos ```styles.js``` que apresentam os estilos das páginas.
+
 ---
 
 ## Como usar

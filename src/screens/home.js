@@ -3,14 +3,15 @@ import {
   View,
   Text,
   FlatList,
-  StyleSheet,
   TouchableOpacity,
   Alert,
   StatusBar,
   Modal,
 } from 'react-native';
+
 import { useFocusEffect } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+
 import styles from './styles';
 import { getProdutos, deleteProduto } from '../database/dbFunctions';
 import ProductItem from '../components/products';
@@ -151,7 +152,6 @@ export default function Home({ navigation }) {
         }
       />
 
-      {/* BOTÃO FLUTUANTE */}
       <TouchableOpacity
         style={styles.fab}
         onPress={() => navigation.navigate('AddProductScreen')}

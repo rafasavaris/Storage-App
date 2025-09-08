@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 import { useNavigation } from '@react-navigation/native';
+
 import styles from './styles';
 import { addProduto } from '../database/dbFunctions';
 

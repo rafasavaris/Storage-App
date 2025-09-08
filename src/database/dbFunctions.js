@@ -1,4 +1,3 @@
-// src/database/productService.js
 import { getDatabase } from './db';
 
 export const initDB = async () => {

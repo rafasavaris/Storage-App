@@ -1,104 +1,133 @@
-# Cadastro de Produtos - React Native
+# Product Registration App – React Native 📦
 
-Um aplicativo simples em **React Native** para **cadastrar, editar e excluir produtos**.
+A simple **React Native** application for **adding, editing, and deleting products**, with local data persistence using SQLite.
 
-> Esse aplicativo foi feito utilizando Windows como Sistema Operacional e sendo simulado no aplicativo Expo Go, disponível para Android e iOS.
-
----
-
-## Funcionalidades
-
-- **Adicionar produtos** com:
-  - Nome
-  - Preço
-  - Descrição (opcional)
-- **Editar produtos** existentes
-- **Excluir produtos**
-- Lista de produtos com ordenação (por criação ou alfabética)
-- Modal de visualização rápida de detalhes do produto
-- Persistência dos dados utilizando **SQLite**
+> This application was developed on **Windows OS** and tested using the **Expo Go** app, available for Android and iOS devices.
 
 ---
 
-## Tecnologias e versões utilizadas:
+## ✨ Features
 
-- **Node.js:** v22.18.0
-- **npm:** 10.9.3
-- **React Native:** 0.79.5
-- **Expo CLI:** 6.3.12
-- **Expo SDK:** 0.24.21
-- **React Navigation:** 7.1.17
-- **SQLite:** `expo-sqlite` 15.2.14 
-
-> Essas versões são testadas e compatíveis com o projeto. Versões mais antigas podem causar erros de compilação ou runtime.
+- **Add products** with:
+  - Name
+  - Price
+  - Description (optional)
+- **Edit existing products**
+- **Delete products**
+- Product list with sorting options:
+  - By creation date
+  - Alphabetically
+- Quick-view **modal** to display product details
+- Local data persistence using **SQLite**
 
 ---
 
-## Como usar
+## 🧰 Technologies & Versions
 
+- **Node.js:** v22.18.0  
+- **npm:** 10.9.3  
+- **React Native:** 0.79.5  
+- **Expo CLI:** 6.3.12  
+- **Expo SDK:** 0.24.21  
+- **React Navigation:** 7.1.17  
+- **SQLite:** `expo-sqlite` 15.2.14  
 
-Este tutorial considera que você já possui Node instalado.
+> These versions were tested and are compatible with the project. Using older versions may cause build or runtime issues.
 
-1. **Clone o repositório:**
+---
+
+## 🚀 Getting Started
+
+This guide assumes you already have **Node.js** installed.
+
+### 1️) Clone the repository
 
 ```bash
-git clone <https://github.com/rafasavaris/Storage-App>
+git clone https://github.com/rafasavaris/Storage-App
 ```
 
-2. **Instalar Explo CLi**
+### 2) Install Expo CLI
+
 ```bash
 npm install -g expo-cli
 ```
-Isso permite criar, iniciar, compilar e gerenciar projetos React Native.
 
+This allows you to create, run, and manage React Native projects using Expo.
 
-3. **Instalar dependências**
-```bash
+### 3) Install dependencies
+
+```
 npm install
 ```
-Esse comando instala todas as dependências necessárias para o projeto funcionar corretamente.
 
-4. **Instale o aplicativo Expo Go na Play Store (Android) ou App Store (iOS)**
+This command installs all required dependencies for the project.
 
-5. **Inicie o projeto**
-```
+### 4) Install Expo Go on your device
+
+* Android: Google Play Store
+* iOS: App Store
+
+### 5) Start the project
+
+```bash
 npx expo start
 ```
-Isso abrirá o Metro Bundler. Caso você tenha aberto outro aplicativo recentemente, utilize o comando abaixo para limpar o cachê:
-```
+
+This will open the Metro Bundler.
+If you encounter cache-related issues, run:
+
+```bash
 npx expo start -c
 ```
 
-6. **Executar no dispositivo**
-Dispositivo físico: escaneie o QR code usando o app Expo Go.
+### 6) Run on a physical device
+
+Scan the QR code using the Expo Go app.
+
+## 🗂️ Project Structure
+
+Inside the `src` folder:
+
+- **components/**  
+  Reusable components shared across screens, such as the product list item (`ProductItem`).
+- **database/**  
+  Contains all SQLite connection logic and CRUD (Create, Read, Update, Delete) operations.
+- **screens/**  
+  Application screens, each with its own logic and UI.
+
+Both `components` and `screens` directories include `styles.js` files responsible for styling.
 
 ---
 
-## Estrutura do projeto
-Dentro da pasta ```src```:
-- **components/**: Contém componentes que podem ser reutilizados em várias telas, como a listagem de produtos (`ProductItem`).
-- **database/**: Contém toda a lógica de conexão com o SQLite e funções para CRUD (create, read, update, delete).
-- **screens/**: Contém as telas do aplicativo, cada uma com sua lógica e interface.
+## 🧑‍💻 How to Use the App
 
-Sendo que a pasta ```components``` e a pasta ```screens``` possuem arquivos ```styles.js``` que apresentam os estilos das páginas.
+- **Add Product:**  
+  Click the **+** button or **Add Product** (when the list is empty). Fill in the required fields (Name and Price) and the optional Description. Click **Save**.
 
----
+- **Edit Product:**  
+  Tap a product in the list to open the modal. Click **Edit**, update the information, and save. After confirming the success alert, you are redirected to the main screen.
 
-## Como usar
-* **Adicionar Produto:** Clique no botão + ou Adicionar Produto (quando não há produtos adicionados). Preencha os campos obrigatórios (Nome e Preço) e opcional (Descrição). Clique em Salvar.
-* **Editar Produto:** Clique em um produto na lista para abrir o Modal. Clique em Editar. Altere os dados e clique em Salvar. Ao fechar o Alert de sucesso, você volta automaticamente para a tela principal.
-* **Excluir Produto:** Na lista, clique no botão de excluir. Confirme a exclusão no Alert.
-* **Ordenar Produtos:** Use o botão no canto superior direito para alternar entre ordenação por criação ou alfabética.
+- **Delete Product:**  
+  Click the delete button on a product and confirm the action in the alert dialog.
+
+- **Sort Products:**  
+  Use the button in the top-right corner to toggle between sorting by creation date or alphabetically.
 
 ---
 
-## Observações
-* Todos os dados são armazenados localmente usando SQLite.
-* A tabela de produtos é criada automaticamente na primeira execução.
+## 📝 Notes
+
+- All data is stored locally using **SQLite**.
+- The products table is created automatically on the first app execution.
 
 ---
 
-## Possíveis melhorias:
-* Adicionar pesquisa de produtos.
-* Implementar filtros por preço ou categoria.
-* Sincronização com backend para persistência em nuvem.
+## 🚧 Possible Improvements
+
+- Add product search functionality
+- Implement filters by price or category
+- Integrate a backend for cloud-based data persistence
+
+---
+
+If you have any questions or suggestions, feel free to reach out 😊
